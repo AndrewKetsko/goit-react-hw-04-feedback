@@ -1,18 +1,29 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, List, ListEl } from "./FeedbackOptions.styled";
+import { Button, List, ListEl } from './FeedbackOptions.styled';
 
-export default function FeedbackOptions({buttonClick}) {
-return <>
-    {/* <p>Please leave feedback</p> */}
-        <List>
-            <ListEl><Button type="button" onClick={buttonClick}>good</Button></ListEl>
-            <ListEl><Button type="button" onClick={buttonClick}>neutral</Button></ListEl>
-            <ListEl><Button type="button" onClick={buttonClick}>bad</Button></ListEl>
-        </List>
-    </>
-};
+export default function FeedbackOptions({ buttonClick }) {
+  return (
+    <List>
+      <ListEl>
+        <Button type="button" onClick={buttonClick}>
+          Good
+        </Button>
+      </ListEl>
+      <ListEl>
+        <Button type="button" onClick={buttonClick}>
+          Neutral
+        </Button>
+      </ListEl>
+      <ListEl>
+        <Button type="button" onClick={buttonClick}>
+          Bad
+        </Button>
+      </ListEl>
+    </List>
+  );
+}
 
 FeedbackOptions.propTypes = {
-    buttonClick: PropTypes.func.isRequired
+  buttonClick: PropTypes.func.isRequired,
 };

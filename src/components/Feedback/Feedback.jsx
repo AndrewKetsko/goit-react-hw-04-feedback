@@ -3,29 +3,18 @@ import FeedbackOptions from './feedbackoptions/FeedbackOptions';
 import Statistics from './statistics/Statistics';
 import Section from './section/Section';
 import Notification from './notification/Notification';
+import PropTypes from 'prop-types';
 
-export const Feedback = ({state}) => {
-  const [total, setTotal] = useState(
-    Object.values(state).reduce((acc, value) => (acc += value), 0)
-  );
-  // state = {
-  //     total: Object.values(this.props.state).reduce((acc, value) => acc += value, 0)
-  // };
+export const Feedback = ({ state, useStateFunc }) => {
+  const [total, setTotal] = useState(0);
 
   const buttonClick = e => {
-    state[e.currentTarget.innerHTML] += 1;
+    useStateFunc['set' + e.currentTarget.innerHTML](prev => prev + 1);
     setTotal(prev => prev + 1);
   };
 
-  // countTotalFeedback = () => {
-  //     // console.log(Object.values(this.props.state));
-  //     Object.values(this.props.state).reduce((acc, value) => acc += value, 0);
-  // }
-
   const countPositiveFeedbackPercentage = () =>
-    total === 0
-      ? 0
-      : Math.floor((state.good * 100) / total);
+    total === 0 ? 0 : Math.floor((state.good * 100) / total);
 
   return (
     <>
@@ -41,10 +30,7 @@ export const Feedback = ({state}) => {
             <Statistics
               state={state}
               total={total}
-              // countTotalFeedback={this.countTotalFeedback}
-              countPositiveFeedbackPercentage={
-                countPositiveFeedbackPercentage
-              }
+              countPositiveFeedbackPercentage={countPositiveFeedbackPercentage}
             />
           ) : (
             <Notification message={'There is no feedback'} />
@@ -55,4 +41,7 @@ export const Feedback = ({state}) => {
   );
 };
 
-// export default Feedback;
+Feedback.propTypes = {
+  state: PropTypes.object.isRequired,
+  useStateFunc: PropTypes.object.isRequired,
+};
