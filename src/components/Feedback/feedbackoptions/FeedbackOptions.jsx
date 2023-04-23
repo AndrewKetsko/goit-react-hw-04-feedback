@@ -2,24 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, List, ListEl } from './FeedbackOptions.styled';
 
-export default function FeedbackOptions({ buttonClick }) {
+export default function FeedbackOptions({ buttonClick, options }) {
   return (
     <List>
-      <ListEl>
-        <Button type="button" onClick={buttonClick}>
-          Good
-        </Button>
-      </ListEl>
-      <ListEl>
-        <Button type="button" onClick={buttonClick}>
-          Neutral
-        </Button>
-      </ListEl>
-      <ListEl>
-        <Button type="button" onClick={buttonClick}>
-          Bad
-        </Button>
-      </ListEl>
+      {options.map(option => (
+        <ListEl key={option}>
+          <Button type="button" onClick={buttonClick}>
+            {option}
+          </Button>
+        </ListEl>
+      ))}
     </List>
   );
 }

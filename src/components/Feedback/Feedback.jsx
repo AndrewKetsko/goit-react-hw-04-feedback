@@ -20,7 +20,12 @@ export const Feedback = ({ state, useStateFunc }) => {
     <>
       <Section
         title={'Please leave feedback'}
-        children={<FeedbackOptions buttonClick={buttonClick} />}
+        children={
+          <FeedbackOptions
+            buttonClick={buttonClick}
+            options={Object.keys(state)}
+          />
+        }
       />
 
       <Section
